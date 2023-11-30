@@ -1,0 +1,13 @@
+.def-button{
+    -fx-background-color:  rgb(255, 84, 167);
+    -fx-color: rgb(255,255,255);
+    -fx-font-family: "Arial Black";
+}
+
+.main{
+    -fx-background-color: #dd98d1;
+}
+
+.side-bar{
+    -fx-background-color: #6458ae;
+}

@@ -1,4 +1,4 @@
-package com.example.shilubi;
+package com.example.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

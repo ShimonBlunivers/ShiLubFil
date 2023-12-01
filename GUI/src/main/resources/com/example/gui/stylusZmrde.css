@@ -1,8 +1,20 @@
 *{
     -fx-font-family: "Arial Black";
 }
+.kunda{
+    -fx-font-family: "Arial" !important;
+    -fx-text-fill: rgb(13, 255, 0);
+    -fx-color-label-visible: green;
+}
+
+.text-area .content {
+
+    -fx-background-color: black ;
+}
+
 
 #choosenImage{
+    -fx-background-image: url("./images.jpg");
     -fx-background-position: center;
     -fx-background-size: contain;
     -fx-background-repeat: none;

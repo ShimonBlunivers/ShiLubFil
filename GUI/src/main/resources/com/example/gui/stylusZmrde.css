@@ -2,13 +2,10 @@
     -fx-font-family: "Arial Black";
 }
 
-#window{
-    -fx-min-height: 500px;
-    -fx-min-width: 600px;
-}
-
 #choosenImage{
-    -fx-image: center;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-background-repeat: none;
 }
 
 .def-button{

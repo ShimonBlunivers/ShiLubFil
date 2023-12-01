@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -15,7 +16,7 @@ public class HelloController {
     public Button fileButton;
 
     @FXML
-    public ImageView myImage;
+    public Pane myImage;
     @FXML
     protected void chooseImage() {
         Window window = this.fileButton.getScene().getWindow();
@@ -31,8 +32,9 @@ public class HelloController {
         File selectedFile = fileChooser.showOpenDialog(window);
 
         if (selectedFile != null) {
-            Image image = new Image(selectedFile.toURI().toString());
-            myImage.setImage(image);
+            String path = selectedFile.toURI().toString();
+            String style = "-fx-background-image: url(" + path + ")";
+            myImage.setStyle(style);
         }
     }
 }

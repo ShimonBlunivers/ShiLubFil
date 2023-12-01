@@ -1,11 +1,32 @@
+*{
+    -fx-font-family: "Arial Black";
+}
+
+#window{
+    -fx-min-height: 500px;
+    -fx-min-width: 600px;
+}
+
+#choosenImage{
+    -fx-image: center;
+}
+
 .def-button{
     -fx-background-color:  rgb(255, 84, 167);
     -fx-color: rgb(255,255,255);
     -fx-font-family: "Arial Black";
 }
 
+.def-button:hover{
+    -fx-background-color: rgb(205, 34, 117);
+}
+
+.def-button:pressed{
+    -fx-background-color: rgb(245, 74, 157);
+}
+
 .main{
-    -fx-background-color: #dd98d1;
+    -fx-background-color: #ffa1f0;
 }
 
 .side-bar{

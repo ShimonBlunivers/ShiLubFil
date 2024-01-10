@@ -19,19 +19,19 @@
          </RadioButton>
          <RadioButton fx:id="editedImageRadio" disable="true" layoutX="30.0" layoutY="538.0" text="Edited image" toggleGroup="$group1" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
          <Button fx:id="restoreImageButton" disable="true" layoutX="7.0" layoutY="464.0" prefHeight="41.0" prefWidth="190.0" styleClass="def-button" text="Restore Original Image" AnchorPane.bottomAnchor="60.0" />
-         <Button fx:id="generateImage" layoutX="7.0" layoutY="423.0" onMouseClicked="#saveCurrentImage" prefHeight="41.0" prefWidth="190.0" styleClass="def-button" text="Generate Image" AnchorPane.bottomAnchor="110.0" />
+         <Button fx:id="generateImage" layoutX="7.0" layoutY="423.0" prefHeight="41.0" prefWidth="190.0" styleClass="def-button" text="Generate Image" AnchorPane.bottomAnchor="110.0" />
             <Button fx:id="fileButton" layoutX="5.0" layoutY="14.0" onMouseClicked="#chooseImage" prefHeight="25.0" prefWidth="190.0" styleClass="def-button" text="Select Image File" AnchorPane.topAnchor="10.0" />
             <Pane layoutX="50.0" layoutY="80.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" AnchorPane.topAnchor="80.0" />
-            <Button fx:id="editMatrix" layoutX="5.0" layoutY="48.0" onMouseClicked="#filterGray" prefHeight="25.0" prefWidth="190.0" styleClass="def-button" text="Edit Matrix" AnchorPane.topAnchor="40.0" />
+            <Button fx:id="editMatrix" layoutX="5.0" layoutY="48.0" prefHeight="25.0" prefWidth="190.0" styleClass="def-button" text="Edit Matrix" AnchorPane.topAnchor="40.0" />
             <Button fx:id="applyMatrixFilter" disable="true" layoutX="5.0" layoutY="195.0" prefHeight="25.0" prefWidth="190.0" styleClass="def-button" text="Apply Matrix Filter" AnchorPane.topAnchor="190.0" />
    </AnchorPane>
          <MenuBar prefHeight="25.0" prefWidth="800.0" styleClass="menu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
              <Menu text="File">
-                 <MenuItem text="Load Image" />
-                 <MenuItem text="Save Image" />
+                 <MenuItem onAction="#chooseImage" text="Load Image" />
+                 <MenuItem onAction="#saveCurrentImage" text="Save Image" />
              </Menu>
              <Menu text="Filters">
-                 <MenuItem fx:id="Grayscale" text="Grayscale" />
+                 <MenuItem fx:id="Grayscale" onAction="#filterGray" text="Grayscale" />
                  <MenuItem fx:id="Negative" text="Negative" />
                  <MenuItem text="Unspecified Action" />
                  <MenuItem text="Unspecified Action" />

@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.media.*;
 import javafx.util.Duration;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -50,6 +49,20 @@ public class HelloController {
 
     public Image editedImage, originalImage;
 
+
+    @FXML
+    public void aboutWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("about-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("About");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.isAlwaysOnTop();
+        addTextToConsole("Opened About");
+        stage.show();
+    }
 
     protected  void addTextToConsole(String string){
         String consoleText = appConsole.getText();
@@ -81,19 +94,26 @@ public class HelloController {
                 addTextToConsole("Image Loaded Succesfully");
         }
     }
-
-
-
     @FXML
-    public void aboutWindow() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("about-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("About");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+    public void saveCurrentImage() throws IOException {
+        Window window = this.fileButton.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        File file = fileChooser.showSaveDialog(window);
+
+        if (file != null) {
+            String fileName = file.getName();
+
+            if (!fileName.toUpperCase().endsWith(".PNG")) {
+                file = new File(file.getAbsolutePath() + ".png");
+            }
+
+            WritableImage img =  importedImage.snapshot(new SnapshotParameters(), null);
+            BufferedImage image = SwingFXUtils.fromFXImage(img, null);
+            ImageIO.write(image, "png", file);
+
+            addTextToConsole("Succesfuly saved");
+        }
     }
 
     @FXML
@@ -110,35 +130,6 @@ public class HelloController {
         addTextToConsole("Filter (Grayscale) applied");
 
     }
-    @FXML
-    public void saveCurrentImage() throws IOException {
-        Window window = this.fileButton.getScene().getWindow();
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        File file = fileChooser.showSaveDialog(window);
-
-        if (file != null) {
-
-            String fileName = file.getName();
-
-            if (!fileName.toUpperCase().endsWith(".PNG")) {
-                file = new File(file.getAbsolutePath() + ".png");
-            }
-
-            // PixelReader pixelReader = image.getPixelReader();
-            // int width = (int) image.getWidth();
-            // int height = (int) image.getHeight();
-            // WritableImage writableImage = new WritableImage(pixelReader, width, height);
-
-
-            WritableImage img =  importedImage.snapshot(new SnapshotParameters(), null);
-            BufferedImage image = SwingFXUtils.fromFXImage(img, null);
-            ImageIO.write(image, "png", file);
-
-            addTextToConsole("Succesfuly saved");
-        }
-    }
-
 
     protected void playMeme(){
         String musicFile = "GUI/src/main/resources/com/example/gui/josh.mp3";     // For ksnapimu to funguje s GUI a lubosovi bez :)
@@ -154,7 +145,6 @@ public class HelloController {
     public void onAction()
     {
         final MenuItem menuItem = new MenuItem();
-
         aboutButton.getItems().add(menuItem);
         aboutButton.addEventHandler(Menu.ON_SHOWN, event -> aboutButton.hide());
         aboutButton.addEventHandler(Menu.ON_SHOWING, event -> aboutButton.fire());

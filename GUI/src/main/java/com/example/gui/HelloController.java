@@ -68,8 +68,11 @@ public class HelloController {
         String consoleText = appConsole.getText();
         String setTextToConsole = consoleText  + string + "\n";
         appConsole.setText(setTextToConsole);
-
     }
+
+    // Filipova bradka smrdi fr
+
+
 
     @FXML
     protected void chooseImage() {

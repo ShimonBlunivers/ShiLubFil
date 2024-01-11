@@ -31,13 +31,13 @@
                  <MenuItem onAction="#saveCurrentImage" text="Save Image" />
              </Menu>
              <Menu fx:id="filterButton" disable="true" text="Filters" />
-             <Menu fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutWindow" text="About" userData="ff">
+             <Menu fx:id="aboutButton" mnemonicParsing="false" text="Help" userData="ff">
          <accelerator>
             <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
          </accelerator>
-         <graphic>
-            <Label />
-         </graphic></Menu>
-             <Menu fx:id="exitButton" text="Exit" />
+         <items>
+            <MenuItem mnemonicParsing="false" text="Escape" />
+            <MenuItem mnemonicParsing="false" onAction="#aboutWindow" text="About" />
+         </items></Menu>
          </MenuBar>
 </AnchorPane>

@@ -159,23 +159,12 @@ public class HelloController {
 
     }
 
-
-    public void onAction()
-    {
-        final MenuItem menuItem = new MenuItem();
-        aboutButton.getItems().add(menuItem);
-        aboutButton.addEventHandler(Menu.ON_SHOWN, event -> aboutButton.hide());
-        aboutButton.addEventHandler(Menu.ON_SHOWING, event -> aboutButton.fire());
-    }
-
     @FXML
     public void initialize() {
         addTextToConsole("Initialization...");
         playMeme();
-        onAction();
         importedImage.fitWidthProperty().bind(myImage.widthProperty());
         importedImage.fitHeightProperty().bind(myImage.heightProperty());
-
         imageView = importedImage;
 
         for (Filter filter : Filter.filters) {

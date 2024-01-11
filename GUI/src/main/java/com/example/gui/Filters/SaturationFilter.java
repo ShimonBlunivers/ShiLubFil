@@ -6,12 +6,12 @@ import javafx.scene.effect.ColorAdjust;
 public class SaturationFilter extends Filter {
 
     public SaturationFilter() {
-        super("Saturation");
+        super("Saturace");
     }
     @Override
     public void apply() {
-        ColorAdjust colorAdjust = (ColorAdjust) HelloController.imageView.getEffect();
-        colorAdjust.setSaturation(100);
+        ColorAdjust colorAdjust = new ColorAdjust();;
+        colorAdjust.setSaturation(1);
         HelloController.imageView.setEffect(colorAdjust);
     }
 }

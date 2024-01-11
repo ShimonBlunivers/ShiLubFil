@@ -37,8 +37,7 @@ public class HelloController {
     public RadioButton originalImageRadio;
     public RadioButton editedImageRadio;
     public Button restoreImageButton;
-    public Image editedImage, originalImage;
-    public static ArrayList<Filter> usedFilters = new ArrayList<>();
+    public static Image editedImage, originalImage;
 
 
     @FXML
@@ -64,23 +63,22 @@ public class HelloController {
 
     @FXML
     protected void restoreImage() {
-        Filter.resetFilters();
-        usedFilters = new ArrayList<Filter>();
+        editedImage = originalImage;
+        imageView.setImage(editedImage);
+        originalImageRadio.setSelected(true);
     }
     @FXML
     protected void viewOriginalImage() {
-        Filter.resetFilters();
+        imageView.setImage(originalImage);
     }
 
     @FXML
     protected void viewEditedImage() {
-        for (Filter filter : usedFilters) filter.apply();
+        imageView.setImage(editedImage);
     }
 
     @FXML
     protected void chooseImage() {
-        Filter.resetFilters();
-
         Window window = this.fileButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Image File");
@@ -92,14 +90,14 @@ public class HelloController {
         File selectedFile = fileChooser.showOpenDialog(window);
 
         if (selectedFile != null) {
-                String path = selectedFile.toURI().toString();
-                Image image = new Image(path);
-                originalImage = image;
-                editedImage = image;
-                importedImage.setImage(image);
-                addTextToConsole("Image Loaded Succesfully");
+            String path = selectedFile.toURI().toString();
+            Image image = new Image(path);
+            originalImage = image;
+            editedImage = image;
+            importedImage.setImage(image);
+            addTextToConsole("Image Loaded Succesfully");
+            lockButtons(false);
         }
-        lockButtons(false);
     }
 
     public void lockButtons(boolean state) {

@@ -7,11 +7,11 @@ import javafx.util.Duration;
 
 public class GrayscaleFilter extends Filter {
     public GrayscaleFilter() {
-        super("Grayscale");
+        super("Černobílý");
     }
     @Override
     public void apply() {
-        ColorAdjust grayscale = (ColorAdjust) HelloController.imageView.getEffect();
+        ColorAdjust grayscale = new ColorAdjust();
         grayscale.setSaturation(-1.0); // fully desaturatedImageView imageView = new ImageView(new Image("path/to/image.png"));
         HelloController.imageView.setEffect(grayscale);
     }

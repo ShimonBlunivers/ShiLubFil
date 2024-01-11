@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Image Filters");
+        stage.setTitle("Joshua");
         stage.setMinHeight(650.0);
         stage.setMinWidth(800.0);
         stage.setScene(scene);

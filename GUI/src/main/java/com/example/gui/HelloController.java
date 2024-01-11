@@ -70,7 +70,6 @@ public class HelloController {
         stage.setTitle("About");
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.isAlwaysOnTop();
         addTextToConsole("Opened About");
         stage.show();
     }
@@ -105,9 +104,8 @@ public class HelloController {
         fileChooser.setTitle("Choose Image File");
 
         //Set extension filter
-        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("Image files (*.png *.jpg)", "*.PNG","*.JPG");
+        fileChooser.getExtensionFilters().addAll(extFilterPNG);
 
         File selectedFile = fileChooser.showOpenDialog(window);
 
@@ -132,7 +130,7 @@ public class HelloController {
     public void saveCurrentImage() throws IOException {
         Window window = this.fileButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("Image files (*.png)", "*.PNG");
         File file = fileChooser.showSaveDialog(window);
 
         if (file != null) {

@@ -30,13 +30,7 @@
                  <MenuItem onAction="#chooseImage" text="Load Image" />
                  <MenuItem onAction="#saveCurrentImage" text="Save Image" />
              </Menu>
-             <Menu text="Filters">
-                 <MenuItem fx:id="Grayscale" onAction="#filterGray" text="Grayscale" />
-                 <MenuItem fx:id="Negative" text="Negative" />
-                 <MenuItem text="Unspecified Action" />
-                 <MenuItem text="Unspecified Action" />
-                 <MenuItem text="Unspecified Action" />
-             </Menu>
+             <Menu fx:id="filterButton" text="Filters" />
              <Menu fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutWindow" text="About" userData="ff">
          <accelerator>
             <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

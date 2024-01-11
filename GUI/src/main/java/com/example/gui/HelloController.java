@@ -1,5 +1,6 @@
 package com.example.gui;
 
+import com.example.gui.Filters.Filter;
 import javafx.animation.FadeTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -34,10 +35,14 @@ public class HelloController {
     public TextArea appConsole;
     @FXML
     public ImageView importedImage;
+    public static ImageView imageView;
     @FXML
     public Pane myImage;
     @FXML
     public Menu exitButton, aboutButton;
+    @FXML
+    private Menu filterButton;
+
     public RadioButton originalImageRadio;
     public ToggleGroup group1;
     public RadioButton editedImageRadio;
@@ -64,11 +69,10 @@ public class HelloController {
         stage.show();
     }
 
-    protected  void addTextToConsole(String string){
+    public void addTextToConsole(String string){
         String consoleText = appConsole.getText();
         String setTextToConsole = consoleText  + string + "\n";
         appConsole.setText(setTextToConsole);
-
     }
 
     @FXML
@@ -116,20 +120,6 @@ public class HelloController {
         }
     }
 
-    @FXML
-    protected void filterGray() {
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setSaturation(44); // increase red by 50%
-        importedImage.setEffect(colorAdjust);
-        FadeTransition fade = new FadeTransition(Duration.seconds(2), importedImage);
-        fade.setFromValue(1.0); // fully opaque
-        fade.setToValue(0.0); // fully transparentfade.play();
-        ColorAdjust grayscale = new ColorAdjust();
-        grayscale.setSaturation(-1.0); // fully desaturatedImageView imageView = new ImageView(new Image("path/to/image.png"));
-        importedImage.setEffect(grayscale);
-        addTextToConsole("Filter (Grayscale) applied");
-
-    }
 
     protected void playMeme(){
         String musicFile = "GUI/src/main/resources/com/example/gui/josh.mp3";     // For ksnapimu to funguje s GUI a lubosovi bez :)
@@ -157,7 +147,13 @@ public class HelloController {
         onAction();
         importedImage.fitWidthProperty().bind(myImage.widthProperty());
         importedImage.fitHeightProperty().bind(myImage.heightProperty());
-        addTextToConsole("Completed...");
 
+        imageView = importedImage;
+
+        for (Filter filter : Filter.filters) {
+            filter.addToMenu(filterButton, this);
+        }
+
+        addTextToConsole("Completed...");
     }
 }

@@ -12,6 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,10 +26,13 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.media.*;
 import javafx.util.Duration;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 
@@ -42,17 +49,16 @@ public class HelloController {
     public Menu exitButton, aboutButton;
     @FXML
     private Menu filterButton;
-
     public RadioButton originalImageRadio;
     public ToggleGroup group1;
     public RadioButton editedImageRadio;
     public Button restoreImageButton;
     public Button generateImage;
     public Button editMatrix;
-    public MenuItem Grayscale;
-    public MenuItem Negative;
 
     public Image editedImage, originalImage;
+
+    public static ArrayList<Filter> usedFilters = new ArrayList<>();
 
 
     @FXML
@@ -76,16 +82,32 @@ public class HelloController {
     }
 
     @FXML
+    protected void restoreImage() {
+        Filter.resetFilters();
+        usedFilters = new ArrayList<Filter>();
+    }
+    @FXML
+    protected void viewOriginalImage() {
+        Filter.resetFilters();
+    }
+
+    @FXML
+    protected void viewEditedImage() {
+        for (Filter filter : usedFilters) filter.apply();
+    }
+
+    @FXML
     protected void chooseImage() {
+        Filter.resetFilters();
+
         Window window = this.fileButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Image File");
 
         //Set extension filter
-        FileChooser.ExtensionFilter extFilterAll = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterAll, extFilterJPG, extFilterPNG);
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
         File selectedFile = fileChooser.showOpenDialog(window);
 
@@ -97,6 +119,14 @@ public class HelloController {
                 importedImage.setImage(image);
                 addTextToConsole("Image Loaded Succesfully");
         }
+        lockButtons(false);
+    }
+
+    public void lockButtons(boolean state) {
+        restoreImageButton.setDisable(state);
+        originalImageRadio.setDisable(state);
+        editedImageRadio.setDisable(state);
+        filterButton.setDisable(state);
     }
     @FXML
     public void saveCurrentImage() throws IOException {

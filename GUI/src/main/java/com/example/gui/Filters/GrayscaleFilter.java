@@ -11,14 +11,7 @@ public class GrayscaleFilter extends Filter {
     }
     @Override
     public void apply() {
-        System.out.println(name + " clicked!");
 
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setSaturation(44); // increase red by 50%
-        HelloController.imageView.setEffect(colorAdjust);
-        FadeTransition fade = new FadeTransition(Duration.seconds(2), HelloController.imageView);
-        fade.setFromValue(1.0); // fully opaque
-        fade.setToValue(0.0); // fully transparentfade.play();
         ColorAdjust grayscale = new ColorAdjust();
         grayscale.setSaturation(-1.0); // fully desaturatedImageView imageView = new ImageView(new Image("path/to/image.png"));
         HelloController.imageView.setEffect(grayscale);

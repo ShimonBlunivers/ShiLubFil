@@ -12,7 +12,7 @@ public class GrayscaleFilter extends Filter {
     @Override
     public void apply() {
         ColorAdjust grayscale = new ColorAdjust();
-        grayscale.setSaturation(-1.0); // fully desaturatedImageView imageView = new ImageView(new Image("path/to/image.png"));
+        grayscale.setSaturation(-1.0);
         HelloController.imageView.setEffect(grayscale);
     }
 }

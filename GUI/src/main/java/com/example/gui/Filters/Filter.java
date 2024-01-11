@@ -41,11 +41,17 @@ public abstract class Filter {
 
                 HelloController.editedImage = HelloController.imageView.snapshot(new SnapshotParameters(), null);
                 HelloController.imageView.setImage(HelloController.editedImage);
+                resetFilters();
 
                 controller.addTextToConsole("Filter (" + name + ") applied");
             }
         });
 
         menu.getItems().add(menuItem);
+    }
+    public static void resetFilters() {
+        HelloController.imageView.setEffect(new ColorAdjust());
+        HelloController.imageView.setScaleX(1);
+        HelloController.imageView.setScaleY(1);
     }
 }

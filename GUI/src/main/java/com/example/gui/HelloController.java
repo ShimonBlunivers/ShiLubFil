@@ -13,8 +13,10 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -23,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 
@@ -150,5 +153,89 @@ public class HelloController {
         }
 
         addTextToConsole("Completed...");
+    }
+
+    @FXML
+    protected void generateImage() {
+
+        int width = 1024;
+        int height = 1024;
+
+        WritableImage image = new WritableImage(width, height);
+        PixelWriter pw = image.getPixelWriter();
+
+        Random rn = new Random();
+
+        double r;
+        double g;
+        double b;
+
+        double modifierX = rn.nextDouble();
+        double modifierY = rn.nextDouble();
+        double frequenceModifier = rn.nextDouble(20) + 40;
+
+        double modifierR = rn.nextDouble();
+        double modifierG = rn.nextDouble();
+        double modifierB = rn.nextDouble();
+
+        int type = rn.nextInt(2);
+
+        for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+
+            double modR = modifierR;
+            double modG = modifierG;
+            double modB = modifierB;
+
+            if (modR < 0.25) modR = rn.nextDouble();
+            if (modG < 0.25) modG = rn.nextDouble();
+            if (modB < 0.25) modB = rn.nextDouble();
+
+            if (modR < rn.nextDouble() * 0.2 * Math.sin(x - y)) modifierR = rn.nextDouble();
+            if (modG < rn.nextDouble() * 0.2 * Math.sin(x - y)) modifierG = rn.nextDouble();
+            if (modB < rn.nextDouble() * 0.2 * Math.sin(x - y)) modifierB = rn.nextDouble();
+
+            if (type == 0){
+                int i = rn.nextInt(4);
+                if (i == 0){
+                    r = rn.nextDouble(256) * Math.sin(((x * modifierX) * (y * modifierY+1)) / frequenceModifier) * modR;
+                    g = rn.nextDouble(256) * Math.sin(((x * modifierX) * (y * modifierY+1)) / frequenceModifier) * modG;
+                    b = rn.nextDouble(256) * Math.sin(((x * modifierX) * (y * modifierY+1)) / frequenceModifier) * modB;
+                } else if (i == 1) {
+                    r = rn.nextDouble(256) * Math.sin(((x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modR;
+                    g = rn.nextDouble(256) * Math.sin(((x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modG;
+                    b = rn.nextDouble(256) * Math.sin(((x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modB;
+
+                } else if (i == 2) {
+                    r = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modR;
+                    g = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modG;
+                    b = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modB;
+
+                } else {
+                    r = rn.nextDouble(256) * Math.sin(((x * modifierX) / (y * modifierY+1)) / frequenceModifier) * modR;
+                    g = rn.nextDouble(256) * Math.sin(((x * modifierX) / (y * modifierY+1)) / frequenceModifier) * modG;
+                    b = rn.nextDouble(256) * Math.sin(((x * modifierX) / (y * modifierY+1)) / frequenceModifier) * modB;
+                }
+            } else if (type == 1) {
+                r = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modR;
+                g = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modG;
+                b = rn.nextDouble(256) * Math.sin(((x * modifierX) - (y * modifierY+1)) / frequenceModifier) * modB;
+            }
+            else {
+
+                r = rn.nextDouble(256) * Math.sin((-(x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modR;
+                g = rn.nextDouble(256) * Math.sin((-(x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modG;
+                b = rn.nextDouble(256) * Math.sin((-(x * modifierX) + (y * modifierY+1)) / frequenceModifier) * modB;
+            }
+            pw.setColor(x, y, Color.color(Math.abs((r / 256) % 1), Math.abs((g / 256) % 1), Math.abs((b / 256) % 1)));
+        }
+
+
+        originalImage = image;
+        editedImage = image;
+        importedImage.setImage(image);
+
+
+        addTextToConsole("Image Generated Succesfully");
+        lockButtons(false);
     }
 }

@@ -10,7 +10,7 @@ public class SaturationFilter extends Filter {
     }
     @Override
     public void apply() {
-        ColorAdjust colorAdjust = new ColorAdjust();;
+        ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setSaturation(1);
         HelloController.imageView.setEffect(colorAdjust);
     }

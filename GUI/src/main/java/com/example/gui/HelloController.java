@@ -1,11 +1,7 @@
 package com.example.gui;
 
 import com.example.gui.Filters.Filter;
-import javafx.animation.FadeTransition;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,9 +10,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -25,11 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.media.*;
-import javafx.util.Duration;
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,26 +28,16 @@ import javax.imageio.ImageIO;
 
 public class HelloController {
     @FXML
-    public Button fileButton, applyMatrixFilter;
+    public Button fileButton;
     public TextArea appConsole;
-    @FXML
     public ImageView importedImage;
     public static ImageView imageView;
-    @FXML
     public Pane myImage;
-    @FXML
-    public Menu exitButton, aboutButton;
-    @FXML
-    private Menu filterButton;
+    public Menu filterButton;
     public RadioButton originalImageRadio;
-    public ToggleGroup group1;
     public RadioButton editedImageRadio;
     public Button restoreImageButton;
-    public Button generateImage;
-    public Button editMatrix;
-
     public Image editedImage, originalImage;
-
     public static ArrayList<Filter> usedFilters = new ArrayList<>();
 
 
@@ -74,10 +54,12 @@ public class HelloController {
         stage.show();
     }
 
-    public void addTextToConsole(String string){
+    public void addTextToConsole(String string) {
         String consoleText = appConsole.getText();
-        String setTextToConsole = consoleText  + string + "\n";
+        String setTextToConsole = consoleText + string + "\n";
         appConsole.setText(setTextToConsole);
+        appConsole.setScrollTop(Double.MAX_VALUE); //this will scroll to the bottom
+
     }
 
     @FXML
@@ -130,12 +112,10 @@ public class HelloController {
     public void saveCurrentImage() throws IOException {
         Window window = this.fileButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("Image files (*.png)", "*.PNG");
         File file = fileChooser.showSaveDialog(window);
 
         if (file != null) {
             String fileName = file.getName();
-
             if (!fileName.toUpperCase().endsWith(".PNG")) {
                 file = new File(file.getAbsolutePath() + ".png");
             }

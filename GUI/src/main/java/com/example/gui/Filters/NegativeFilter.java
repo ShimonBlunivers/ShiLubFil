@@ -3,15 +3,14 @@ package com.example.gui.Filters;
 import com.example.gui.HelloController;
 import javafx.scene.effect.ColorAdjust;
 
-public class SaturationFilter extends Filter {
-
-    public SaturationFilter() {
-        super("Saturation");
+public class NegativeFilter extends Filter {
+    public NegativeFilter() {
+        super("Negativ");
     }
+
     @Override
     public void apply() {
         ColorAdjust colorAdjust = (ColorAdjust) HelloController.imageView.getEffect();
-        colorAdjust.setSaturation(100);
-        HelloController.imageView.setEffect(colorAdjust);
+
     }
 }

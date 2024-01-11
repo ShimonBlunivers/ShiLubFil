@@ -14,6 +14,7 @@ public abstract class Filter {
     public static ArrayList<Filter> filters = new ArrayList<>();
 
     public static GrayscaleFilter grayscaleFilter = new GrayscaleFilter();
+    public static NegativeFilter negativeFilter = new NegativeFilter();
     public static SaturationFilter saturationFilter = new SaturationFilter();
     public static MirrorHorizontalFilter mirrorHorizontalFilter = new MirrorHorizontalFilter();
     public static MirrorVerticalFilter mirrorVerticalFilter = new MirrorVerticalFilter();

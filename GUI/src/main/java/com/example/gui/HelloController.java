@@ -131,7 +131,7 @@ public class HelloController {
 
 
     protected void playMeme(){
-        String musicFile = "GUI/src/main/resources/com/example/gui/josh.mp3";     // For ksnapimu to funguje s GUI a lubosovi bez :)
+        String musicFile = "D:\\Files-D\\Programming\\Java\\Skola\\ShiLubFil\\GUI\\src\\main\\resources\\com\\example\\gui/josh.mp3";     // For ksnapimu to funguje s GUI a lubosovi bez :)
 
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
